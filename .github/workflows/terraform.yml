@@ -97,7 +97,7 @@ jobs:
 
         ssh -i ./deploy/mykey.pem -o StrictHostKeyChecking=no "ec2-user@$INSTANCE_IP" mkdir -p /home/ec2-user/api
 
-        scp -i ./deploy/mykey.pem -r ./publish "ec2-user@$INSTANCE_IP:/home/ec2-user/api"
+#        scp -i ./deploy/mykey.pem -r ./publish "ec2-user@$INSTANCE_IP:/home/ec2-user/api"
 #        ssh -i ./deploy/mykey.pem -o StrictHostKeyChecking=no ec2-user@${{env.EC2_PUBLIC_IP}} "cd home/ec2-user/api && export ASPNETCORE_URLS='"http://*:80;https://*:443"' && ./LightWeight.exe"
 
 
