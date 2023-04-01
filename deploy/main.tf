@@ -63,7 +63,7 @@ resource "null_resource" "install_dotnet" {
     type        = "ssh"
     user        = "ec2-user"
     private_key = file("test.pem")
-    host        = aws_instance.api.public_ip
+    host        = aws_instance.app.public_ip
   }
 
   provisioner "remote-exec" {
