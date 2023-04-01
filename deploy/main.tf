@@ -69,7 +69,7 @@ resource "null_resource" "install_dotnet" {
   provisioner "remote-exec" {
     inline = [
       "sudo yum update -y",
-      "sudo amazon-linux-extras install -y dotnet-sdk-5.0"
+      "sudo amazon-linux-extras install -y dotnet-sdk-6.0"
     ]
   }
 }
