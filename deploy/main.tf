@@ -27,7 +27,7 @@ resource "aws_instance" "app" {
     Name = "MyWebAPI"
   }
 
-  key_name               = "test"
+  key_name               = "mykey"
   vpc_security_group_ids = [aws_security_group.app_sg.id]
 }
 
@@ -62,7 +62,7 @@ resource "null_resource" "install_dotnet" {
   connection {
     type        = "ssh"
     user        = "ec2-user"
-    private_key = file("test.pem")
+    private_key = file("mykey.pem")
     host        = aws_instance.app.public_ip
   }
 
