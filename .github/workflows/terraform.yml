@@ -92,6 +92,4 @@ jobs:
         cd deploy
         terraform init
         terraform apply -auto-approve
-        INSTANCE_IP=$(terraform output -json | jq -r '.instance_ip.value')
-        scp -i test.pem -r ./publish ec2-user@$INSTANCE_IP:/api
         
