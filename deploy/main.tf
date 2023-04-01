@@ -16,7 +16,7 @@ terraform {
 }
 
 provider "aws" {
-  region = "us-central-1"
+  region = "eu-central-1"
 }
 
 resource "aws_instance" "app" {
