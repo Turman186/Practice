@@ -67,6 +67,10 @@ resource "aws_security_group" "app_sg" {
 }
 
 resource "null_resource" "install_dotnet" {
+  depends_on = [
+    aws_instance.app
+  ]
+
   connection {
     type        = "ssh"
     user        = "ec2-user"
