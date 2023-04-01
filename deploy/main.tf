@@ -19,23 +19,6 @@ provider "aws" {
   region = "eu-central-1"
 }
 
-resource "aws_vpc" "example" {
-  cidr_block = "10.0.0.0/16"
-
-  tags = {
-    Name = "example-vpc"
-  }
-}
-
-resource "aws_subnet" "example" {
-  vpc_id                  = aws_vpc.example.id
-  cidr_block              = "10.0.1.0/24"
-
-  tags = {
-    Name = "example-subnet"
-  }
-}
-
 resource "aws_instance" "app" {
   ami           = "ami-00ad2436e75246bba"
   instance_type = "t2.micro"
@@ -46,14 +29,11 @@ resource "aws_instance" "app" {
 
   key_name               = "mykey"
   vpc_security_group_ids = [aws_security_group.app_sg.id]
-  subnet_id          = aws_subnet.example.id
 }
 
 resource "aws_security_group" "app_sg" {
   name        = "app_sg"
   description = "Allow inbound traffic for the application"
-
-  vpc_id      = aws_vpc.example.id
 
   ingress {
     from_port   = 80
