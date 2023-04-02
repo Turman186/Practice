@@ -95,7 +95,7 @@ jobs:
         INSTANCE_IP=$(terraform output -raw ec2_public_ip)
         echo $INSTANCE_IP
 
-        scp -vvv -i ./mykey.pem -r ./publish "ec2-user@54.93.104.25:/home/ec2-user/api"
+        scp -vvv -i ./mykey.pem -r ../publish "ec2-user@54.93.104.25:/home/ec2-user/api"
 #        ssh -i ./mykey.pem -o StrictHostKeyChecking=no ec2-user@${{env.EC2_PUBLIC_IP}} "cd home/ec2-user/api && export ASPNETCORE_URLS='"http://*:80;https://*:443"' && ./LightWeight.exe"
 
 
