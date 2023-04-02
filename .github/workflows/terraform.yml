@@ -84,6 +84,12 @@ jobs:
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
 
+    - name: Create key file
+      run: |
+        echo "${{ secrets.MY_KEY }}" > keyfile.pem
+        chmod 600 keyfile.pem
+
+
     - name: Deploy to EC2
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -95,16 +101,7 @@ jobs:
         INSTANCE_IP=$(terraform output -raw ec2_public_ip)
         echo $INSTANCE_IP
 
-        chmod 600 ./mykey.pem
-
-        scp -o LogLevel=VERBOSE -i ./mykey.pem -r ../publish "ec2-user@$INSTANCE_IP:/home/ec2-user/api" > output.log 2>&1
-#        ssh -i ./mykey.pem -o StrictHostKeyChecking=no ec2-user@${{env.EC2_PUBLIC_IP}} "cd home/ec2-user/api && export ASPNETCORE_URLS='"http://*:80;https://*:443"' && ./LightWeight.exe"
-
-    - name: Upload output log as artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: output-log
-        path: output.log
-
+        scp -o LogLevel=VERBOSE -i ../keyfile.pem -r ../publish "ec2-user@$INSTANCE_IP:/home/ec2-user/api"
+#        ssh -i ../keyfile.pem -o StrictHostKeyChecking=no ec2-user@${{env.EC2_PUBLIC_IP}} "cd home/ec2-user/api && export ASPNETCORE_URLS='"http://*:80;https://*:443"' && ./LightWeight.exe"
 
         
