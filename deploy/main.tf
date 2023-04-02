@@ -85,6 +85,12 @@ resource "null_resource" "install_dotnet" {
       "mkdir -p /home/ec2-user/api"
     ]
   }
+
+  provisioner "file" {
+    source = "../publish"
+    destination = "/home/ec2-user/api"
+  }
+
 }
 
 output "instance_ip" {
