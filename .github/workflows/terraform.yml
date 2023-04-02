@@ -97,7 +97,7 @@ jobs:
 
         chmod 600 ./mykey.pem
 
-        scp -vvv - ./mykey.pem -r ../publish "ec2-user@$INSTANCE_IP:/home/ec2-user/api"
+        scp -o LogLevel=VERBOSE -i ./mykey.pem -r ../publish "ec2-user@$INSTANCE_IP:/home/ec2-user/api"
 #        ssh -i ./mykey.pem -o StrictHostKeyChecking=no ec2-user@${{env.EC2_PUBLIC_IP}} "cd home/ec2-user/api && export ASPNETCORE_URLS='"http://*:80;https://*:443"' && ./LightWeight.exe"
 
 
