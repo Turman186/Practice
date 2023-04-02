@@ -97,8 +97,14 @@ jobs:
 
         chmod 600 ./mykey.pem
 
-        scp -o LogLevel=VERBOSE -i ./mykey.pem -r ../publish "ec2-user@$INSTANCE_IP:/home/ec2-user/api"
+        scp -o LogLevel=VERBOSE -i ./mykey.pem -r ../publish "ec2-user@$INSTANCE_IP:/home/ec2-user/api" > output.log 2>&1
 #        ssh -i ./mykey.pem -o StrictHostKeyChecking=no ec2-user@${{env.EC2_PUBLIC_IP}} "cd home/ec2-user/api && export ASPNETCORE_URLS='"http://*:80;https://*:443"' && ./LightWeight.exe"
+
+    - name: Upload output log as artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: output-log
+        path: output.log
 
 
         
