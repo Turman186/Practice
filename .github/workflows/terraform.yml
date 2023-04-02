@@ -97,9 +97,7 @@ jobs:
 
         chmod 400 ./mykey.pem
 
-        ssh-add ./mykey.pem
-
-        scp -vvv -r ../publish "ec2-user@$INSTANCE_IP:/home/ec2-user/api"
+        scp -vvv - ./mykey.pem -r ../publish "ec2-user@$INSTANCE_IP:/home/ec2-user/api"
 #        ssh -i ./mykey.pem -o StrictHostKeyChecking=no ec2-user@${{env.EC2_PUBLIC_IP}} "cd home/ec2-user/api && export ASPNETCORE_URLS='"http://*:80;https://*:443"' && ./LightWeight.exe"
 
 
