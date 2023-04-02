@@ -81,7 +81,8 @@ resource "null_resource" "install_dotnet" {
   provisioner "remote-exec" {
     inline = [
       "sudo rpm -Uvh https://packages.microsoft.com/config/centos/7/packages-microsoft-prod.rpm",
-      "sudo yum install -y aspnetcore-runtime-6.0"
+      "sudo yum install -y aspnetcore-runtime-6.0",
+      "mkdir -p /home/ec2-user/api"
     ]
   }
 }
