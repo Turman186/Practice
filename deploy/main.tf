@@ -92,7 +92,7 @@ resource "null_resource" "install_dotnet" {
   }
 }
 
-resource "null_resource" "code deploy" {
+resource "null_resource" "code_deploy" {
   triggers = {
     always_run = timestamp()
   }
