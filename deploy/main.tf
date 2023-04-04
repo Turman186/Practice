@@ -74,7 +74,7 @@ resource "null_resource" "install_dotnet" {
   connection {
     type        = "ssh"
     user        = "ec2-user"
-    private_key = file("mykey.pem")
+    private_key = file("keyfile.pem")
     host        = aws_instance.app.public_ip
   }
 
@@ -100,7 +100,7 @@ resource "null_resource" "code_deploy" {
   connection {
     type        = "ssh"
     user        = "ec2-user"
-    private_key = file("mykey.pem")
+    private_key = file("keyfile.pem")
     host        = aws_instance.app.public_ip
   }
 
