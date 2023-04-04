@@ -90,7 +90,24 @@ resource "null_resource" "install_dotnet" {
     source = "../publish"
     destination = "/home/ec2-user/api"
   }
+}
 
+resource "null_resource" "code deploy" {
+  triggers = {
+    always_run = timestamp()
+  }
+
+  connection {
+    type        = "ssh"
+    user        = "ec2-user"
+    private_key = file("mykey.pem")
+    host        = aws_instance.app.public_ip
+  }
+
+    provisioner "file" {
+    source = "../publish"
+    destination = "/home/ec2-user/api"
+  }
 }
 
 output "instance_ip" {
